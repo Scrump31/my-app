@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: build-code
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install # will run `yarn install` command
+      - name: eslint
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: lint # will run `yarn lint` command
+      - name: unit tests
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: test # will run `yarn test` command
