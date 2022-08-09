@@ -21,7 +21,7 @@ jobs:
       - name: unit tests
         uses: borales/actions-yarn@v3.0.0
         with:
-          cmd: test:coverage # will run `yarn test` command
+          cmd: test:coverage # will run `yarn test:coverage` command
       - name: 'upload test reports'
         uses: actions/upload-artifact@v2
         with:
