@@ -1,0 +1,31 @@
+name: Integration Tests
+
+on:
+  pull_request:
+    types:
+    - closed
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+      - name: Run API tests
+        # run: npm run test:qa
+        run: npm run test
+      - name: 'upload test reports'
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          # path: api-tests/reports
+          path: coverage
+          retention-days: 5
